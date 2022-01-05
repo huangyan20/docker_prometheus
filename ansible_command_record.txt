@@ -1,0 +1,41 @@
+#创建脚本存储路径
+ansible -i hosts_compute all -m shell -a 'mkdir /root/docker_info_pushgateway'
+#远程拷贝脚本到目标机器，src本地路径文件，dest目标机路径，backup是否覆盖
+ansible -i hosts_compute all -m copy -a 'src=/root/tmp/docker/docker_status.sh dest=/root/docker_info_pushgateway'
+ansible -i hosts_compute all -m copy -a 'src=/root/tmp/docker/crontab_five_once.sh dest=/root/docker_info_pushgateway'
+#给予脚本权限
+ansible -i hosts_compute all -m shell -a 'chmod -R 755 /root/docker_info_pushgateway'
+#运行主脚本（可直接运行定时脚本）
+#ansible -i hosts_compute all -m shell -a '/root/docker_info_pushgateway/docker_status.sh'
+#运行定时脚本
+ansible -i hosts_compute all -m shell -a '/root/docker_info_pushgateway/crontab_five_once.sh'
+
+#追加白名单,practical_carson为容器名
+ansible -i hosts_compute all -m shell -a 'echo "cyborg_conductor" >> /var/log/prometheus_docker_info/white_list.txt'
+ansible -i hosts_compute all -m shell -a 'echo "cyborg_api" >> /var/log/prometheus_docker_info/white_list.txt'
+#追加白名单，单个ip
+ansible -i "172.16.18.6," all -m shell -a 'echo "practical_carson" >> /var/log/prometheus_docker_info/white_list.txt'
+
+#2022_01_05
+#compute
+#这些机器还没修好，告警出来的
+#172.16.17.194
+#172.16.17.199
+#172.16.17.211
+
+#这些机器还没修好
+# - '172.16.17.212:9100'
+# - '172.16.17.215:9100'
+# - '172.16.17.216:9100'
+# - '172.16.17.217:9100'
+# - '172.16.17.219:9100'
+# - '172.16.17.221:9100'
+# - '172.16.17.222:9100'
+# - '172.16.17.232:9100'
+# - '172.16.17.234:9100'
+# - '172.16.17.236:9100'
+# - '172.16.17.245:9100'
+# - '172.16.17.246:9100'
+# - '172.16.17.247:9100'
+# - '172.16.17.249:9100'
+# - '172.16.17.250:9100'
