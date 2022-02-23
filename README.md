@@ -10,6 +10,6 @@ docker_fluentd文件夹主要是用于EFK实验
 构建fluentd，将数据收集后指向es（实验中）  
 
 # kibana+elasticsearch+openstack（fluentd）
-更改上面方案，openstack在部署时已经加入fluentd
-构建第三方kibana+elasticsearch，仿照openstack（kibana+elasticsearch+fluentd）
-更改openstack（fluentd）配置文件，将地址指向第三方kibana+elasticsearch即可
+更改上面方案，openstack在部署时已经加入fluentd  
+构建第三方kibana+elasticsearch，仿照openstack（kibana+elasticsearch+fluentd）  
+更改openstack（fluentd）配置文件，将地址指向第三方kibana+elasticsearch即可  
